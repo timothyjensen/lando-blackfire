@@ -1,0 +1,21 @@
+name: blackfire
+recipe: lamp
+env_file:
+  - .env
+services:
+  appserver:
+    build_as_root:
+      - ./blackfire-setup.sh
+tooling:
+  blackfire:
+    service: appserver
+    user: root
+  blackfire-agent:
+    service: appserver
+    user: root
+  blackfire-agent-service:
+    description: Start/Stop/Restart Blackfire agent service
+    cmd:
+      - /etc/init.d/blackfire-agent
+    service: appserver
+    user: root
